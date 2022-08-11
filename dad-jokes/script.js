@@ -1,8 +1,13 @@
 const jokeEl = document.getElementById('joke')
 const jokeBtn = document.getElementById('jokeBtn')
 
+generateJoke()
 
-async function generateJokes() {
+jokeBtn.addEventListener('click', generateJoke)
+
+//ASYNC/AWAIT
+
+async function generateJoke() {
     const config = {
         headers: {
             'Accept': 'application/json'
@@ -17,6 +22,8 @@ async function generateJokes() {
 }
 
 
+//.THEN
+
 // const generateJoke = () => {
 //     const config = {
 //         headers: {
@@ -29,7 +36,3 @@ async function generateJokes() {
 //             jokeEl.innerHTML = data.joke
 //         })
 // }
-
-generateJoke()
-
-jokeBtn.addEventListener('click', generateJoke)
