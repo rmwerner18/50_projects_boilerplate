@@ -57,10 +57,3 @@ form.addEventListener('submit', e => {
     }
 })
 
-
-
-// https://www.themoviedb.org/
-// f79b1766f7b13db6dc8736e771e52f5a
-
-
-// eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJmNzliMTc2NmY3YjEzZGI2ZGM4NzM2ZTc3MWU1MmY1YSIsInN1YiI6IjYzMDFhMGYxNWY0YjczMDA4MjY3ZGQ2ZCIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.l0LL2fdw4eS_iF5-sog_a7UzT3N9EGP3zp7gexpU9P8
