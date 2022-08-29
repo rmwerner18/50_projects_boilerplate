@@ -11,17 +11,12 @@ let color = 'black'
 let isPressed = false
 let x 
 let y
+let rapidIncrease
+let rapidDecrease
+
 
 setSize()
 
-function increaseSize() {
-    size++
-    setSize()
-}
-
-function decreaseSize() {
-    
-}
 
 colorInput.addEventListener('change', e => {
     color = e.target.value
@@ -31,25 +26,36 @@ function setSize() {
     sizeDisplay.innerHTML = size
 }
 
-// increase.addEventListener('click', () => {
-//     if (size < 50) {
-//         size++
-//     }
-//     setSize()
-// })
+function increaseSize() {
+    if (size < 50) {
+        size++
+        setSize()
+    }
+}
+
+function decreaseSize() {
+    if (size>5) {
+        size--
+        setSize()
+    }
+}
 
 increase.addEventListener('mousedown', () => {
-    if (size < 50) {
-        increaseSize()
-        setTimeout(increaseSize, 1000)
-    }
+    increaseSize()
+    rapidIncrease = setInterval(increaseSize, 100)
 })
 
-decrease.addEventListener('click', () => {
-    if (size > 5) {
-        size--
-    }
-    setSize()
+increase.addEventListener('mouseup', () => {
+    clearInterval(rapidIncrease)
+})
+
+decrease.addEventListener('mousedown', () => {
+    decreaseSize()
+    rapidDecrease = setInterval(decreaseSize, 100)
+})
+
+decrease.addEventListener('mouseup', () => {
+    clearInterval(rapidDecrease)
 })
 
 function drawCircle(x, y) {
