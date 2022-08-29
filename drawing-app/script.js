@@ -12,9 +12,9 @@ let isPressed = false
 let x 
 let y
 
-setSettings()
+setSize()
 
-function setSettings() {
+function setSize() {
     sizeDisplay.innerHTML = size
 }
 
@@ -22,18 +22,18 @@ increase.addEventListener('click', () => {
     if (size < 50) {
         size++
     }
-    setSettings()
+    setSize()
 })
 
 colorInput.addEventListener('change', e => {
-    console.log(e)
+    color = e.target.value
 })
 
 decrease.addEventListener('click', () => {
     if (size > 5) {
         size--
     }
-    setSettings()
+    setSize()
 })
 
 function drawCircle(x, y) {
