@@ -14,19 +14,35 @@ let y
 
 setSize()
 
+function increaseSize() {
+    size++
+    setSize()
+}
+
+function decreaseSize() {
+    
+}
+
+colorInput.addEventListener('change', e => {
+    color = e.target.value
+})
+
 function setSize() {
     sizeDisplay.innerHTML = size
 }
 
-increase.addEventListener('click', () => {
-    if (size < 50) {
-        size++
-    }
-    setSize()
-})
+// increase.addEventListener('click', () => {
+//     if (size < 50) {
+//         size++
+//     }
+//     setSize()
+// })
 
-colorInput.addEventListener('change', e => {
-    color = e.target.value
+increase.addEventListener('mousedown', () => {
+    if (size < 50) {
+        increaseSize()
+        setTimeout(increaseSize, 1000)
+    }
 })
 
 decrease.addEventListener('click', () => {
@@ -75,6 +91,10 @@ canvas.addEventListener('mousemove', e => {
         x = x2
         y = y2
     }
+})
+
+clearBtn.addEventListener('click', () => {
+    ctx.clearRect(0,0, canvas.width, canvas.height)
 })
 
 
