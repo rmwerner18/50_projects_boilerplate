@@ -20,6 +20,13 @@ const changeSlide = (direction) => {
 
     if(direction === 'up') {
         activeSlidesIndex++
-        if(active)
+        if(activeSlidesIndex > slidesLength) {
+            activeSlidesIndex = 0
+        }
+    } else {
+        activeSlidesIndex--
+        if(activeSlidesIndex < 0) {
+            activeSlidesIndex = slidesLength
+        }      
     }
 }   
