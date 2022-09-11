@@ -6,10 +6,11 @@ const main = document.getElementById('main')
 async function getUser(username) { 
     try {
         const { data } = await axios(APIURL + username)
-    
-        createUserCard(data)
+        const repos = await axios(APIURL + username + '/repos')
+
+        createUserCard(data, repos.data)
     } catch(err) {
-        console.log(err)
+        createErrorCard('Could not find any users with that username')
     }
 }
 
@@ -19,14 +20,13 @@ form.addEventListener('submit', e => {
     let username = search.value
 
     if (username) {
-        user = getUser(username)
-
+        getUser(username)
         search.value = ''
     } 
 })
 
-function createUserCard(user) {
-    const { name, avatar_url, bio, followers, following, public_repos } = user
+function createUserCard(data, repos) {
+    const { name, avatar_url, bio, followers, following, public_repos } = data
     const cardHTML = `
         <div class="card">
             <div>
@@ -41,7 +41,7 @@ function createUserCard(user) {
                     <li>${public_repos} <strong>Repos</strong></li>
                 </ul>
                 <div id="repos">
-                    <a href="#" class="repo">Repo 1</a>
+                    <a href="${repos[0].html_url}" class="repo">${repos[0].name}}</a>
                     <a href="#" class="repo">Repo 2</a>
                     <a href="#" class="repo">Repo 3</a>
                 </div>
@@ -49,5 +49,14 @@ function createUserCard(user) {
         </div>
     `
 
+    main.innerHTML = cardHTML
+}
+
+function createErrorCard(message) {
+    const cardHTML = `
+        <div class="card">
+            <h1>${message}</h1>
+        </div>
+    `
     main.innerHTML = cardHTML
 }
