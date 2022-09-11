@@ -3,17 +3,6 @@ const form = document.getElementById('form')
 const search = document.getElementById('search')
 const main = document.getElementById('main')
 
-async function getUser(username) { 
-    try {
-        const { data } = await axios(APIURL + username)
-        const repos = await axios(APIURL + username + '/repos')
-
-        createUserCard(data, repos.data)
-    } catch(err) {
-        createErrorCard('Could not find any users with that username')
-    }
-}
-
 form.addEventListener('submit', e => {
     e.preventDefault()
 
@@ -25,7 +14,27 @@ form.addEventListener('submit', e => {
     } 
 })
 
-function createUserCard(data, repos) {
+async function getUser(username) { 
+    try {
+        const { data } = await axios(APIURL + username)
+        createUserCard(data)
+        getRepos(username)
+    } catch(err) {
+        createErrorCard('Could not find any users with that username')
+    }
+}
+
+async function getRepos(username) {
+    try {
+        const { data } = await axios(APIURL + username + '/repos')
+        addReposToCard(data)
+    } catch(err) {
+        console.log(err)
+        createErrorCard('Problem fetching repos')
+    }
+}
+
+function createUserCard(data) {
     const { name, avatar_url, bio, followers, following, public_repos } = data
     const cardHTML = `
         <div class="card">
@@ -40,16 +49,28 @@ function createUserCard(data, repos) {
                     <li>${following} <strong>Following</strong></li>
                     <li>${public_repos} <strong>Repos</strong></li>
                 </ul>
-                <div id="repos">
-                    <a href="${repos[0].html_url}" class="repo">${repos[0].name}}</a>
-                    <a href="#" class="repo">Repo 2</a>
-                    <a href="#" class="repo">Repo 3</a>
-                </div>
+                <div id="repos"></div>
             </div>
         </div>
     `
 
     main.innerHTML = cardHTML
+}
+
+function addReposToCard(repos) {
+    const reposDiv = document.getElementById('repos')
+    console.log(repos)
+    repos
+        .slice(0, 10)
+        .forEach(repo => {
+            const repoLink = document.createElement('a')
+            repoLink.classList.add('repo')
+            repoLink.href = repo.html_url
+            repoLink.target = '_blank'
+            repoLink.innerHTML = repo.name
+
+            reposDiv.appendChild(repoLink)
+        })
 }
 
 function createErrorCard(message) {
