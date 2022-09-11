@@ -83,6 +83,7 @@ body {
 .user-info ul li {
     display: flex;
     align-items: center;
+    margin-right: 0.6rem;
 }
 
 .user-info ul li strong {
@@ -94,4 +95,20 @@ body {
     text-decoration: none;
     color: #fff;
     background-color: #2a2a72;
+    font-size: 0.7rem;
+    padding: 0.25rem 0.5rem;
+    margin-right: 0.5rem;
+    margin-bottom: 0.5rem;
+    display: inline-block;
+}
+
+@media(max-width: 500px) {
+    .card {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .user-form {
+        max-width: 400px;
+    }
 }
