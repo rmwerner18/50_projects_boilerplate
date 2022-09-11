@@ -1,17 +1,13 @@
 const APIURL = 'https://api.github.com/users/'
 const form = document.getElementById('form')
 const search = document.getElementById('search')
-const nameHeader = document.querySelector('user-info h2')
-
-const abc = getUser('rmwerner18')
-console.log(abc)
+const main = document.getElementById('main')
 
 async function getUser(username) { 
     try {
         const { data } = await axios(APIURL + username)
     
-        // console.log(data)
-        return data
+        createUserCard(data)
     } catch(err) {
         console.log(err)
     }
@@ -26,13 +22,32 @@ form.addEventListener('submit', e => {
         user = getUser(username)
 
         search.value = ''
-        console.log(user)
-        showData(user)
-
     } 
 })
 
-function showData(user) {
-    console.log(user.name)
-    nameHeader.innerHTML = user.login
+function createUserCard(user) {
+    const { name, avatar_url, bio, followers, following, public_repos } = user
+    const cardHTML = `
+        <div class="card">
+            <div>
+                <img class="avatar" src=${avatar_url} alt="">
+            </div>
+            <div class="user-info">
+                <h2>${name}</h2>
+                <p>${bio}</p>
+                <ul>
+                    <li>${followers} <strong>Followers</strong></li>
+                    <li>${following} <strong>Following</strong></li>
+                    <li>${public_repos} <strong>Repos</strong></li>
+                </ul>
+                <div id="repos">
+                    <a href="#" class="repo">Repo 1</a>
+                    <a href="#" class="repo">Repo 2</a>
+                    <a href="#" class="repo">Repo 3</a>
+                </div>
+            </div>
+        </div>
+    `
+
+    main.innerHTML = cardHTML
 }
