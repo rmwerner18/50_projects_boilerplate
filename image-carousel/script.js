@@ -11,6 +11,7 @@ function moveRight() {
         currentImg = 0
     }
     imgs.style.transform = `translateX(-${currentImg * 100}%)`
+    resetinterval()
 }
 
 function moveLeft() {
@@ -19,7 +20,15 @@ function moveLeft() {
         currentImg = imageContainer.childElementCount - 1
     }
     imgs.style.transform = `translateX(-${currentImg * 100}%)`
+    resetinterval() 
 }
 
 left.addEventListener('click', moveLeft)
 right.addEventListener('click', moveRight)
+
+let interval = setInterval(moveRight, 2000)
+
+function resetinterval() {
+    clearInterval(interval)
+    interval = setInterval(moveRight, 2000)
+}
