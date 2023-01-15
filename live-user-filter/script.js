@@ -5,10 +5,8 @@ const userLis = []
 
 const fetchUsers = async () => {
  const result = await fetch('https://randomuser.me/api/?results=40')
- console.log('MAKE API CALL')
  const json = await result.json()
  return json.results
- // json.results.forEach(user => users.push(user))
 }
 
 const makeUserLis = async () => {
@@ -33,10 +31,7 @@ const makeUserLis = async () => {
 }
 
 const filterData = (searchTerm) => {
- console.log(searchTerm)
- console.log(userLis)
  userLis.forEach(userLi => {
-  console.log(userLi.innerText)
   if (userLi.innerText.toLowerCase().includes(searchTerm.toLowerCase())) {
    userLi.classList.remove('hide')
   } else {
