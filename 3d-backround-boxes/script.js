@@ -1,4 +1,5 @@
 const boxes = document.getElementById('boxes')
+const button = document.getElementById('btn')
 
 const grid = [[0,0,0,0],[0,0,0,0],[0,0,0,0],[0,0,0,0]]
 
@@ -10,3 +11,5 @@ grid.forEach((row, rowI) => {
   boxes.append(box)
  })
 })
+
+button.addEventListener('click', () => boxes.classList.toggle('big'))

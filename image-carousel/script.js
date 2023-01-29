@@ -5,6 +5,7 @@ const imageContainer = document.getElementById('imgs')
 let currentImg = 0
 
 console.log(imageContainer.childElementCount)
+
 function moveRight() {
     currentImg++
     if(currentImg === imageContainer.childElementCount) {
